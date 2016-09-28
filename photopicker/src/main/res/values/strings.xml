@@ -1,0 +1,11 @@
+<resources>
+    <string name="picker_all_picture">所有图片</string>
+    <string name="picker_send">发送</string>
+    <string name="picker_send_count">发送(%1$d/%2$d)</string>
+    <string name="picker_preview">预览</string>
+    <string name="picker_preview_count">预览(%d)</string>
+    <string name="picker_count">%d张</string>
+    <string name="picker_select_max">你最多只能选择%d张图片</string>
+    <string name="picture_preview">图片预览</string>
+    <string name="picture_preview_index">图片预览(%1$d/%2$d)</string>
+</resources>
