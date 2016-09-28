@@ -1,12 +1,9 @@
 package com.zhl.photopicker;
 
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,28 +58,21 @@ public class PhotoPickerPresenter implements PhotoPickerContract.Presenter{
     @Override
     public void selectPicture(boolean isSelect, int position) {
         Photo picture = mSelectedAlbum.pictures.get(position);
-        if (mIsSingle) {
-            Intent intent = new Intent();
-            intent.putExtra(Picker.EXTRA_SINGLE_URI, Uri.fromFile(new File(picture.path)));
-            mView.pickFinish(intent);
-        } else {
-            picture.isSelected = isSelect;
-            if (isSelect) {
-                if (mSelectedPathList.size() == mMax) {
-                    picture.isSelected = false;
-                    mView.showMaxSelectTip(mMax, position);
-                } else {
-                    if (!mSelectedPathList.contains(picture.path)) {
-                        mSelectedPathList.add(picture.path);
-                    }
-                }
+        picture.isSelected = isSelect;
+        if (isSelect) {
+            if (mSelectedPathList.size() == mMax) {
+                picture.isSelected = false;
+                mView.showMaxSelectTip(mMax, position);
             } else {
-                if (mSelectedPathList.contains(picture.path)) {
-                    mSelectedPathList.remove(picture.path);
+                if (!mSelectedPathList.contains(picture.path)) {
+                    mSelectedPathList.add(picture.path);
                 }
             }
+        } else {
+            if (mSelectedPathList.contains(picture.path)) {
+                mSelectedPathList.remove(picture.path);
+            }
         }
-
         mView.setPreviewCount(mSelectedPathList.size(), mMax);
     }
 

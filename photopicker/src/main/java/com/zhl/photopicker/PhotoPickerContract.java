@@ -1,6 +1,5 @@
 package com.zhl.photopicker;
 
-import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 
 import java.util.ArrayList;
@@ -21,8 +20,6 @@ public interface PhotoPickerContract {
         void showMaxSelectTip(int max, int position);
 
         void setPreviewCount(int count, int max);
-
-        void pickFinish(Intent intent);
     }
 
     interface Presenter {

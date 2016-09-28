@@ -134,7 +134,9 @@ public class PhotoPickerActivity extends AppCompatActivity implements PhotoPicke
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (mPresenter.isSingle()) {
-                    mPresenter.selectPicture(true, position);
+                    Intent intent = new Intent();
+                    intent.putExtra(Picker.EXTRA_SINGLE_URI, Uri.fromFile(new File(mPhotoAdapter.getItem(position).path)));
+                    pickFinish(intent);
                 } else {
                     Intent it =new Intent(Intent.ACTION_VIEW);
                     Uri mUri = Uri.parse("file://" + mPhotoAdapter.getItem(position).path);
@@ -241,12 +243,6 @@ public class PhotoPickerActivity extends AppCompatActivity implements PhotoPicke
     }
 
     @Override
-    public void pickFinish(Intent intent) {
-        setResult(Activity.RESULT_OK, intent);
-        finish();
-    }
-
-    @Override
     public void onSelect(boolean isSelect, int position) {
         mPresenter.selectPicture(isSelect, position);
     }
@@ -274,5 +270,10 @@ public class PhotoPickerActivity extends AppCompatActivity implements PhotoPicke
                 finish();
             }
         }
+    }
+
+    private void pickFinish(Intent intent) {
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 }

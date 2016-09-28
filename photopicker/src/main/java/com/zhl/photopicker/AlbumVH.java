@@ -27,7 +27,10 @@ public class AlbumVH extends BaseViewHolder<Album> {
     @Override
     public void updateView(Album data, int position) {
         if (data != null) {
-            Glide.with(mContext).load(data.coverPath).diskCacheStrategy(DiskCacheStrategy.ALL).into(mImgCover);
+            Glide.with(mContext).load(data.coverPath).diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .placeholder(R.color.picker_photo_default)
+                    .error(R.color.picker_photo_default)
+                    .into(mImgCover);
             mImgSelected.setVisibility(data.isSelected ? View.VISIBLE : View.GONE);
             mTvName.setText(data.name);
             mTvCount.setText(mContext.getString(R.string.picker_count, data.pictures.size()));
